@@ -18,15 +18,21 @@ python3 -m pip install --upgrade pybind11
 #get ros_base humble source
 
 sudo pip3 install rosinstall_generator
+
 mkdir -p ~/ros2_humble/src
+
 cd ~/ros2_humble/
+
 rosinstall_generator ros_base --rosdistro humble --deps --tar > humble_ros2_base.repos
+
 vcs import src < humble_ros2_base.repos
 
 #install rosdep dependencies
 
 sudo rosdep init
+
 rosdep update
+
 rosdep install --from-paths src --ignore-src --rosdistro humble -y
 
 #build ros
@@ -52,8 +58,12 @@ python3 -m pip install pyserial Adafruit-Blinka adafruit-circuitpython-ads1x15 s
 #install sailbot packages
 
 git clone git@github.com:wpisailbot/sailbot23-24.git
+
 cd sailbot23-24
+
 git submodule init
+
 git submodule update
+
 colcon build
 
