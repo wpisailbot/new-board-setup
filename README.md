@@ -75,3 +75,9 @@ systemctl disable nvgetty
 
 udevadm trigger
 
+# add user to dialout group
+
+sudo usermod -a -G dialout <username>
+
+sudo reboot
+
