@@ -67,3 +67,11 @@ git submodule update
 
 colcon build
 
+# disable UART serial console, so we can talk to esp32
+
+systemctl stop nvgetty
+
+systemctl disable nvgetty
+
+udevadm trigger
+
