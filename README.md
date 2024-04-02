@@ -1,83 +1,129 @@
 # new board setup
 Setup instructions for creating a fresh dev environment for the Jetson Orin Nano
 
-Flash 128GB SD card with Jetson Orin Nano 20.04 image: https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v4.1/jp512-orin-nano-sd-card-image.zip # JP 5.1.2 for now, switch to 6.0 & update this guide when StereoLabs updates ZED SDK for JP 6.0 Ubuntu 22.04
+Add storage to Jetson (SD or SSD, at least 128GB), flash Jetpack 5.1.2 or 5.1.3 using NVIDIA SDK manager (5.1.2 or 5.1.3 for now, switch to 6.0 & update this guide when StereoLabs updates ZED SDK for JP 6.0 Ubuntu 22.04)
 
 # installation:
 
-# remove python 3.9, as it breaks some ROS2 humble packages
-
-sudo apt purge -y python3.9 libpython3.9*
-
 # Acquire and run ZED SDK install script: https://download.stereolabs.com/zedsdk/4.0/l4t35.4/jetsons
 
-# Install pip3 version of pybind
+#setup
 
-python3 -m pip install --upgrade pybind11
+sudo apt update && sudo apt upgrade -y<br>
+sudo adduser sailbot dialout<br>
+sudo adduser sailbot tty<br>
+sudo apt purge -y python3.9 libpython3.9*<br>
+sudo apt install python3-pip<br>
+python3 -m pip install --upgrade pip<br>
+python3 -m pip install --upgrade pybind11<br>
+python3 -m pip install onnx<br>
+sudo apt install python-is-python3<br>
 
-# get ros_base humble source
+#ROS
 
-sudo pip3 install rosinstall_generator
+locale  # check for UTF-8
 
-mkdir -p ~/ros2_humble/src
+sudo apt update && sudo apt install locales<br>
+sudo locale-gen en_US en_US.UTF-8<br>
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8<br>
+export LANG=en_US.UTF-8<br>
 
-cd ~/ros2_humble/
+locale  # verify settings
 
-rosinstall_generator ros_base --rosdistro humble --deps --tar > humble_ros2_base.repos
+sudo apt install software-properties-common<br>
+sudo add-apt-repository universe<br>
 
-vcs import src < humble_ros2_base.repos
+sudo apt update && sudo apt install curl -y<br>
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg<br>
 
-# install rosdep dependencies
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
-sudo rosdep init
+sudo apt update && sudo apt install -y \
+  python3-flake8-docstrings \
+  python3-pip \
+  python3-pytest-cov \
+  ros-dev-tools
+  
+python3 -m pip install -U \
+   flake8-blind-except \
+   flake8-builtins \
+   flake8-class-newline \
+   flake8-comprehensions \
+   flake8-deprecated \
+   flake8-import-order \
+   flake8-quotes \
+   "pytest>=5.3" \
+   pytest-repeat \
+   pytest-rerunfailures
+   
+mkdir -p ~/ros2_humble/src<br>
+cd ~/ros2_humble<br>
+vcs import --input https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos src<br>
 
-rosdep update
+sudo apt upgrade
 
-rosdep install --from-paths src --ignore-src --rosdistro humble -y
+sudo rosdep init<br>
+rosdep update<br>
+rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers"<br>
 
-# build ros
+cd ~/ros2_humble/<br>
+colcon build --symlink-install<br>
 
-colcon build --packages-up-to ros_base --symlink-install
+sudo apt autoremove --purge
 
-# Source ros
+echo 'source /home/sailbot/ros2_humble/install/setup.bash' >> ~/.bashrc<br>
+source ~/.bashrc<br>
 
-source ~/ros2_humble/install/setup.bash
+cd ~
 
-# install apt dependencies
+#manually compile some dependencies
 
-sudo apt install python3-grpcio python3-websockets
+sudo apt install libgeographic-dev
 
-# overwrite default python3-protobuf
+mkdir ros2_ws<br>
+cd ros2_ws<br>
+mkdir src<br>
+cd src<br>
+git clone https://github.com/stereolabs/zed-ros2-interfaces.git<br>
+git clone https://github.com/cra-ros-pkg/robot_localization.git<br>
+git clone https://github.com/ros/diagnostics.git<br>
+git clone https://github.com/ros-drivers/nmea_msgs.git<br>
+git clone https://github.com/stereolabs/zed-ros2-wrapper.git<br>
+git clone https://github.com/stereolabs/zed-ros2-interfaces.git<br>
+git clone https://github.com/ros/angles.git<br>
+git clone https://github.com/ros-geographic-info/geographic_info.git<br>
+cd geographic_info/<br>
+git checkout ros2<br>
+cd ../..<br>
+colcon build --symlink-install<br>
 
-python3 -m pip install --upgrade protobuf
+echo 'source /home/sailbot/ros2_ws/install/setup.bash' >> ~/.bashrc<br>
+source ~/.bashrc<br>
 
-# install pip dependencies
+cd ~
 
-python3 -m pip install pyserial Adafruit-Blinka adafruit-circuitpython-ads1x15 smbus2 
 
-# install sailbot packages
+#Need repo rights for this (ssh key)
+git clone git@github.com:wpisailbot/sailbot23-24.git<br>
+cd  ~/sailbot23-24/sailbot_ws<br>
+colcon build --symlink-install<br>
+echo 'source /home/sailbot/sailbot23-24/sailbot_ws/install/setup.bash' >> ~/.bashrc<br>
+source ~/.bashrc<br>
 
-git clone git@github.com:wpisailbot/sailbot23-24.git
+#install pip dependencies
+python3 -m pip install pyserial numpy==1.21 adafruit-blinka opencv-python scikit-fuzzy protobuf grpcio pyproj geopy
 
-cd sailbot23-24
+#trim tab server
+cd ~<br>
+git clone git@github.com:wpisailbot/trim_tab_server.git<br>
 
-git submodule init
 
-git submodule update
-
-colcon build
 
 # disable UART serial console, so we can talk to esp32
 
-systemctl stop nvgetty
-
-systemctl disable nvgetty
-
-udevadm trigger
-
-# add user to dialout group
-
-sudo usermod -a -G dialout <username>
+systemctl stop nvgetty<br>
+systemctl disable nvgetty<br>
+udevadm trigger<br>
 
 sudo reboot
 
