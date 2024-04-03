@@ -91,6 +91,8 @@ cd ~
 #Need repo rights for this (ssh key)
 git clone git@github.com:wpisailbot/sailbot23-24.git<br>
 cd  ~/sailbot23-24/sailbot_ws<br>
+git submodule init<br>
+git submodule update<br>
 colcon build --symlink-install<br>
 echo 'source /home/sailbot/sailbot23-24/sailbot_ws/install/setup.bash' >> ~/.bashrc<br>
 source ~/.bashrc<br>
