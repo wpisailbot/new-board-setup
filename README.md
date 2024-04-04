@@ -17,7 +17,7 @@ sudo apt install python3-pip<br>
 python3 -m pip install --upgrade pip<br>
 python3 -m pip install --upgrade pybind11<br>
 python3 -m pip install onnx<br>
-sudo apt install python-is-python3<br>
+sudo apt install python-is-python3 python3-venv<br>
 
 #ROS
 
@@ -88,7 +88,7 @@ source ~/.bashrc<br>
 cd ~
 
 
-#Need repo rights for this (ssh key)
+#Need repo rights for this (ssh key)<br>
 git clone git@github.com:wpisailbot/sailbot23-24.git<br>
 cd  ~/sailbot23-24/sailbot_ws<br>
 git submodule init<br>
@@ -97,10 +97,10 @@ colcon build --symlink-install<br>
 echo 'source /home/sailbot/sailbot23-24/sailbot_ws/install/setup.bash' >> ~/.bashrc<br>
 source ~/.bashrc<br>
 
-#install pip dependencies
+#install pip dependencies<br>
 python3 -m pip install pyserial numpy==1.21 adafruit-blinka opencv-python scikit-fuzzy protobuf grpcio pyproj geopy
 
-#trim tab server
+#trim tab server<br>
 cd ~<br>
 git clone git@github.com:wpisailbot/trim_tab_server.git<br>
 
