@@ -106,11 +106,10 @@ git clone git@github.com:wpisailbot/trim_tab_server.git<br>
 
 
 
-# disable UART serial console, so we can talk to esp32
+# Instructions for enabling 4G modem:
 
-systemctl stop nvgetty<br>
-systemctl disable nvgetty<br>
-udevadm trigger<br>
-
+sudo mmcli -m 0<br>
+sudo nmcli c add type gsm ifname <primary port from previous command output> con-name cell apn Mint<br>
+sudo nmcli r wwan on<br>
 sudo reboot
 
