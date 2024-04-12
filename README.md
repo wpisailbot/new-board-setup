@@ -114,7 +114,7 @@ git clone git@github.com:wpisailbot/trim_tab_server.git<br>
 # Instructions for enabling 4G modem:
 
 sudo mmcli -m 0<br>
-sudo nmcli c add type gsm ifname <primary port from previous command output> con-name cell apn Mint<br>
+sudo nmcli c add type gsm ifname \<primary port from previous command output\> con-name cell apn Mint<br>
 sudo nmcli r wwan on<br>
 sudo reboot
 
