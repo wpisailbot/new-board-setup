@@ -1,11 +1,11 @@
 # new board setup
 Setup instructions for creating a fresh dev environment for the Jetson Orin Nano
 
-Add storage to Jetson (SD or SSD, at least 128GB), flash Jetpack 5.1.2 or 5.1.3 using NVIDIA SDK manager (5.1.2 or 5.1.3 for now, switch to 6.0 & update this guide when StereoLabs updates ZED SDK for JP 6.0 Ubuntu 22.04)
+Add storage to Jetson (SD or SSD, at least 128GB), flash Jetpack #5.1.2# using NVIDIA SDK manager (5.1.2 for now, switch to 6.0 & update this guide when StereoLabs updates ZED SDK for JP 6.0 Ubuntu 22.04)
 
 # installation:
 
-# Acquire and run ZED SDK install script: https://download.stereolabs.com/zedsdk/4.0/l4t35.4/jetsons
+# Acquire and run ZED SDK install script: https://www.stereolabs.com/developers/release
 
 #setup
 
