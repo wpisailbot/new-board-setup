@@ -77,6 +77,10 @@ git clone https://github.com/ros-drivers/nmea_msgs.git<br>
 git clone https://github.com/stereolabs/zed-ros2-wrapper.git<br>
 git clone https://github.com/ros/angles.git<br>
 git clone https://github.com/ros-geographic-info/geographic_info.git<br>
+git clone https://github.com/ros/xacro<br>
+cd xacro/<br>
+git checkout ros2<br>
+cd ..<br>
 cd geographic_info/<br>
 git checkout ros2<br>
 cd ../..<br>
