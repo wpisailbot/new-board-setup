@@ -80,7 +80,7 @@ git clone https://github.com/stereolabs/zed-ros2-wrapper.git<br>
 git clone https://github.com/ros/angles.git<br>
 git clone https://github.com/ros-geographic-info/geographic_info.git<br>
 git clone https://github.com/ros/xacro<br>
-https://github.com/ros-perception/vision_opencv.git
+git clone https://github.com/ros-perception/vision_opencv.git<br>
 cd vision_opencv/<br>
 git checkout humble<br>
 cd ..<br>
