@@ -92,7 +92,7 @@ git checkout ros2<br>
 cd ../..<br>
 colcon build --symlink-install<br>
 
-echo 'source /home/sailbot/ros2_ws/install/setup.bash' >> ~/.bashrc<br>
+echo 'source /home/sailbot/ros2_ws/install/local_setup.bash' >> ~/.bashrc<br>
 source ~/.bashrc<br>
 
 cd ~
@@ -104,11 +104,11 @@ cd  ~/sailbot23-24/sailbot_ws<br>
 git submodule init<br>
 git submodule update<br>
 colcon build --symlink-install<br>
-echo 'source /home/sailbot/sailbot23-24/sailbot_ws/install/setup.bash' >> ~/.bashrc<br>
+echo 'source /home/sailbot/sailbot23-24/sailbot_ws/install/local_setup.bash' >> ~/.bashrc<br>
 source ~/.bashrc<br>
 
 #install pip dependencies<br>
-python3 -m pip install pyserial numpy==1.21 adafruit-blinka opencv-python scikit-fuzzy protobuf grpcio pyproj geopy esptool
+python3 -m pip install pyserial numpy==1.21 adafruit-blinka opencv-python scikit-fuzzy protobuf grpcio pyproj geopy esptool filterpy
 
 #trim tab server<br>
 cd ~<br>
