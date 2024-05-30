@@ -87,6 +87,9 @@ cd ..<br>
 cd xacro/<br>
 git checkout ros2<br>
 cd ..<br>
+cd robot_localization/<br>
+git checkout humble-devel<br>
+cd ..<br>
 cd geographic_info/<br>
 git checkout ros2<br>
 cd ../..<br>
