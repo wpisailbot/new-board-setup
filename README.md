@@ -100,6 +100,7 @@ source ~/.bashrc<br>
 
 cd ~
 
+sudo apt install libcgal-dev
 
 #Need repo rights for this (ssh key)<br>
 git clone git@github.com:wpisailbot/sailbot23-24.git<br>
