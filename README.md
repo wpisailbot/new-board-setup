@@ -112,7 +112,7 @@ echo 'source /home/sailbot/sailbot23-24/sailbot_ws/install/local_setup.bash' >> 
 source ~/.bashrc<br>
 
 #install pip dependencies<br>
-python3 -m pip install pyserial numpy==1.21 adafruit-blinka opencv-python scikit-fuzzy protobuf grpcio pyproj geopy esptool filterpy
+python3 -m pip install --upgrade pyserial numpy==1.21 adafruit-blinka opencv-python scikit-fuzzy protobuf grpcio pyproj geopy esptool filterpy
 
 #trim tab server<br>
 cd ~<br>
