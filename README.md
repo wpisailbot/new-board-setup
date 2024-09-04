@@ -9,14 +9,12 @@ Add storage to Jetson (SD or SSD, at least 128GB), flash Jetpack 6.0 rev. 2 usin
 sudo apt update && sudo apt upgrade -y<br>
 sudo apt install -y nvidia-jetpack <br> #Needed because something's wrong with sdk manager 6.0 rev.2 TensorRT
 
-# Acquire and run ZED SDK install script: [https://stereolabs.sfo2.cdn.digitaloceanspaces.com/zedsdk/4.0/ZED_SDK_Tegra_L4T35.4_v4.0.8.zstd.run](https://stereolabs.sfo2.cdn.digitaloceanspaces.com/zedsdk/4.1/ZED_SDK_Tegra_L4T36.3_v4.1.3.zstd.run)
+# Acquire and run ZED SDK install script: [https://stereolabs.sfo2.cdn.digitaloceanspaces.com/zedsdk/4.1/ZED_SDK_Tegra_L4T36.3_v4.1.3.zstd.run](https://stereolabs.sfo2.cdn.digitaloceanspaces.com/zedsdk/4.1/ZED_SDK_Tegra_L4T36.3_v4.1.3.zstd.run)
 
 #setup
 
 sudo adduser sailbot dialout<br>
 sudo adduser sailbot tty<br>
-python3 -m pip install --upgrade pip<br>
-python3 -m pip install onnx<br>
 
 #ROS
 
@@ -60,7 +58,7 @@ cd ..<br>
 sudo ./setup.sh<br>
 
 #install pip dependencies<br>
-python3 -m pip install --upgrade pyserial numpy==1.21 adafruit-blinka opencv-python scikit-fuzzy protobuf grpcio pyproj geopy esptool filterpy
+python3 -m pip install --upgrade pyserial numpy==1.24.4 adafruit-blinka opencv-python scikit-fuzzy protobuf grpcio pyproj geopy esptool filterpy
 
 #trim tab server<br>
 cd ~<br>
