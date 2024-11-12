@@ -61,6 +61,7 @@ sudo ./setup.sh<br>
 python3 -m pip install --upgrade pyserial numpy==1.24.4 adafruit-blinka opencv-python scikit-fuzzy protobuf grpcio pyproj geopy esptool filterpy
 
 #trim tab server<br>
+sudo apt install -y python3-venv # fixes error about Platformio not being able to find Python
 cd ~<br>
 git clone git@github.com:wpisailbot/trim_tab_server.git<br>
 
